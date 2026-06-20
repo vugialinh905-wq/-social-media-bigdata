@@ -115,8 +115,5 @@ db.twitter_posts.aggregate([
 
 
 
----
-EOF
 
-git add README.md
 
