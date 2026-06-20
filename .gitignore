@@ -1,0 +1,18 @@
+# MongoDB data dumps (nếu có)
+*.bson
+*.json.gz
+dump/
+
+# Data files lớn
+*.csv
+*.parquet
+
+# Môi trường Python
+__pycache__/
+*.pyc
+.env
+venv/
+*.egg-info/
+
+# Logs
+*.log
