@@ -1,22 +1,96 @@
-# Social Media Big Data Storage
+# 📊 Social Media Big Data Storage & Analysis
 
-> He thong thu thap, luu tru va phan tich du lieu mang xa hoi su dung MongoDB
+> Hệ thống thu thập, lưu trữ và phân tích dữ liệu mạng xã hội sử dụng MongoDB
 
-## Mo ta du an
+---
 
-Du an xay dung pipeline luu tru va phan tich du lieu lon tu cac nen tang mang xa hoi (Twitter, Reddit).
+## 📋 Mô tả dự án
 
-## Dataset
+Dự án xây dựng pipeline lưu trữ và phân tích dữ liệu lớn từ các nền tảng mạng xã hội (Twitter, Reddit), phục vụ nghiên cứu hành vi người dùng và phân tích nội dung.
 
-| Collection | So luong | Mo ta |
+---
+
+## 🗄️ Dataset
+
+| Collection | Số lượng | Mô tả |
 |---|---|---|
-| twitter_posts | 162,969 | Bai dang tu Twitter/X |
-| reddit_posts | 37,149 | Bai dang tu Reddit |
-| user_profiles | 100 | Ho so nguoi dung |
-| realtime_feeds | 40 | Luong du lieu thoi gian thuc |
+| `twitter_posts` | 162,969 | Bài đăng từ Twitter/X |
+| `reddit_posts` | 37,149 | Bài đăng từ Reddit |
+| `user_profiles` | 100 | Hồ sơ người dùng |
+| `realtime_feeds` | 40 | Luồng dữ liệu thời gian thực |
 
-## Cong nghe su dung
+**Tổng cộng: ~200,000+ documents**
 
-- Database: MongoDB
-- Platform: Linux (WSL2/Ubuntu)
-- Language: Python, JavaScript
+---
+
+## 🏗️ Cấu trúc dữ liệu
+
+### Twitter Post
+\`\`\`json
+{
+  "_id": "ObjectId",
+  "post_id": "tw_0",
+  "text": "Nội dung bài đăng",
+  "category": -1,
+  "platform": "Twitter",
+  "crawled_at": "ISODate"
+}
+\`\`\`
+
+### User Profile
+\`\`\`json
+{
+  "_id": "ObjectId",
+  "user_id": "U0001",
+  "username": "user_1",
+  "platform": "Twitter",
+  "followers": 4698,
+  "total_posts": 62,
+  "joined_date": "ISODate"
+}
+\`\`\`
+
+---
+
+## 🛠️ Công nghệ sử dụng
+
+- **Database:** MongoDB
+- **Platform:** Linux (WSL2 / Ubuntu)
+- **Tools:** MongoDB Shell (mongosh), MongoExport/Import
+- **Language:** Python, JavaScript
+
+---
+
+## 🚀 Cài đặt & Chạy
+
+### Yêu cầu
+- MongoDB >= 5.0
+- mongosh
+
+### Clone & Import dữ liệu
+\`\`\`bash
+git clone https://github.com/vugialinh905-wq/-social-media-bigdata.git
+cd -social-media-bigdata
+\`\`\`
+
+---
+
+## 🔍 Truy vấn mẫu
+
+\`\`\`javascript
+use social_media_db
+
+// Xem 1 bài tweet
+db.twitter_posts.findOne()
+
+// Tìm user có nhiều followers nhất
+db.user_profiles.find().sort({ followers: -1 }).limit(5)
+
+// Thống kê bài đăng theo category
+db.twitter_posts.aggregate([
+  { $group: { _id: "$category", count: { $sum: 1 } } },
+  { $sort: { count: -1 } }
+])
+\`\`\`
+
+--
