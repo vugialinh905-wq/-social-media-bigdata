@@ -76,8 +76,14 @@ sudo systemctl start mongod
 
 ### Clone & Import dữ liệu
 ```bash
-git clone https://github.com/USERNAME/social-media-storage.git
-cd social-media-storage
+git clone https://github.com/vugialinh905-wq/-social-media-bigdata.git
+cd -social-media-bigdata
+
+# Tải dataset từ Kaggle về, đặt vào thư mục data/
+# Link: https://www.kaggle.com/datasets/cosmos98/twitter-and-reddit-sentimental-analysis-dataset
+
+# Chạy script load data vào MongoDB
+python3 load_to_mongodb.py
 
 # Import dữ liệu mẫu
 mongoimport --db social_media_db \
